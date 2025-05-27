@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '@/components/Input';
@@ -46,6 +46,13 @@ export default function SignInScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+        {/* 🔽 Logo image at the top */}
+        <Image
+          source={require('../assets/images/Logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+
         <Text style={styles.title}>Welcome Back</Text>
 
         <Input
@@ -85,6 +92,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
     alignItems: 'center',
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 12,
   },
   title: {
     fontSize: 28,

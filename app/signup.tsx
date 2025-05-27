@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, ScrollView, Alert, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '@/components/Input';
@@ -67,49 +67,22 @@ export default function SignUpScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+        {/* 🔽 App logo at the top */}
+        <Image
+          source={require('../assets/images/Logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+
         <Text style={styles.title}>Create Account</Text>
 
-        <Input
-          placeholder="First Name"
-          value={firstName}
-          onChangeText={setFirstName}
-          style={styles.field}
-        />
-        <Input
-          placeholder="Last Name"
-          value={lastName}
-          onChangeText={setLastName}
-          style={styles.field}
-        />
-        <Input
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          style={styles.field}
-        />
-        <Input
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          style={styles.field}
-        />
-        <Input
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry
-          style={styles.field}
-        />
+        <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} style={styles.field} />
+        <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} style={styles.field} />
+        <Input placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" style={styles.field} />
+        <Input placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry style={styles.field} />
+        <Input placeholder="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry style={styles.field} />
 
-        <Button
-          label="Sign Up"
-          onPress={handleSignUp}
-          color="#123458"
-          style={styles.button}
-        />
+        <Button label="Sign Up" onPress={handleSignUp} color="#123458" style={styles.button} />
 
         <TouchableOpacity style={styles.signInButton} onPress={() => router.replace('/')}>
           <Text style={styles.signInText}>Already have an account? Sign In</Text>
@@ -130,6 +103,11 @@ const styles = StyleSheet.create({
     paddingVertical: 32,
     paddingHorizontal: 24,
     alignItems: 'center',
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 12,
   },
   title: {
     fontSize: 28,
