@@ -25,13 +25,19 @@ export default Input;
 const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
-    marginBottom: 12,
+    maxWidth: 480,
+    alignSelf: 'center',
+    marginBottom: 16,
   },
   input: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 14,
+    backgroundColor: '#FFFFFF',
+    color: '#030303',
+    borderRadius: 10,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
     fontSize: 16,
     width: '100%',
+    borderWidth: 1,
+    borderColor: '#D4C9BE',
   },
 });

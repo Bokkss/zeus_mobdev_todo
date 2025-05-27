@@ -12,13 +12,13 @@ interface ButtonProps {
   label: string;
   onPress?: (event: GestureResponderEvent) => void;
   color?: string;                    // optional prop for customizing button color
-  style?: StyleProp<ViewStyle>;      // allows extra styling if needed
+  style?: StyleProp<ViewStyle>;     // allows extra styling if needed
 }
 
 const Button: React.FC<ButtonProps> = ({
   label,
   onPress,
-  color = '#F8739A', // default pink color
+  color = '#123458', // default dark navy
   style
 }) => {
   return (
@@ -36,14 +36,15 @@ export default Button;
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    padding: 14,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     borderRadius: 12,
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 16,
   },
   text: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16
+    color: '#F1EFEC',
+    fontWeight: '600',
+    fontSize: 16,
   }
 });

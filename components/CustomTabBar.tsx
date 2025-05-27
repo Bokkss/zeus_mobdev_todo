@@ -1,95 +1,96 @@
-import type React from "react"
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native"
-import { Check, Plus, User } from "react-native-feather"
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Check, Plus, User } from 'react-native-feather';
 
 interface TabBarProps {
   state: {
-    index: number
-    routes: { key: string; name: string }[]
-  }
+    index: number;
+    routes: { key: string; name: string }[];
+  };
   navigation: {
-    navigate: (name: string) => void
-  }
+    navigate: (name: string) => void;
+  };
 }
 
 const CustomTabBar: React.FC<TabBarProps> = ({ state, navigation }) => {
-  const { width } = Dimensions.get("window")
+  const currentRouteName = state.routes[state.index].name;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header} />
-      <View style={styles.tabBar}>
-        {/* Completed Tab */}
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate("Completed")}>
-          <View style={[styles.iconContainer, state.index === 0 && styles.activeIconContainer]}>
-            <Check stroke="#FF8AAE" width={24} height={24} />
-          </View>
-          <Text style={styles.tabText}>Completed</Text>
-        </TouchableOpacity>
-
-        {/* To Do Tab */}
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate("ToDo")}>
-          <View
-            style={[styles.iconContainer, styles.centerIconContainer, state.index === 1 && styles.activeIconContainer]}
-          >
-            <Plus stroke="white" width={24} height={24} />
-          </View>
-          <Text style={styles.tabText}>To Do</Text>
-        </TouchableOpacity>
-
-        {/* Profile Tab */}
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate("Profile")}>
-          <View style={[styles.iconContainer, state.index === 2 && styles.activeIconContainer]}>
-            <User stroke="#FF8AAE" width={24} height={24} />
-          </View>
-          <Text style={styles.tabText}>Profile</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.tabBar}>
+      <TabItem
+        label="Completed"
+        Icon={Check}
+        isActive={currentRouteName === 'Completed'}
+        onPress={() => navigation.navigate('Completed')}
+      />
+      <TabItem
+        label="To Do"
+        Icon={Plus}
+        isActive={currentRouteName === 'ToDo'}
+        onPress={() => navigation.navigate('ToDo')}
+      />
+      <TabItem
+        label="Profile"
+        Icon={User}
+        isActive={currentRouteName === 'Profile'}
+        onPress={() => navigation.navigate('Profile')}
+      />
     </View>
-  )
+  );
+};
+
+interface TabItemProps {
+  label: string;
+  Icon: React.FC<{ stroke: string; width: number; height: number }>;
+  isActive: boolean;
+  onPress: () => void;
 }
 
+const TabItem: React.FC<TabItemProps> = ({ label, Icon, isActive, onPress }) => {
+  return (
+    <TouchableOpacity style={styles.tabItem} onPress={onPress}>
+      <Icon stroke={isActive ? '#030303' : '#A0A0A0'} width={22} height={22} />
+      <Text style={[styles.tabText, isActive && styles.activeText]}>{label}</Text>
+      {isActive && <View style={styles.underline} />}
+    </TouchableOpacity>
+  );
+};
+
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
-  header: {
-    height: 30,
-    backgroundColor: "#E5A9B3", // Darker pink from the image
-  },
   tabBar: {
-    flexDirection: "row",
-    height: 70,
-    backgroundColor: "#FFD1DC", // Light pink background
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
+  flexDirection: 'row',
+  height: 60,
+  backgroundColor: '#F1EFEC',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  // 🧽 Soft shadow instead of border
+  shadowColor: '#123458',
+  shadowOffset: { width: 0, height: -2 },
+  shadowOpacity: 0.04,
+  shadowRadius: 4,
+  elevation: 5,
+},
   tabItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  iconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 4,
-  },
-  centerIconContainer: {
-    backgroundColor: "#FF8AAE", // Pink color for the center icon
-  },
-  activeIconContainer: {
-    borderWidth: 2,
-    borderColor: "#FF8AAE",
   },
   tabText: {
     fontSize: 12,
-    color: "#666",
+    color: '#A0A0A0',
+    marginTop: 4,
   },
-})
+  activeText: {
+    color: '#030303',
+    fontWeight: '600',
+  },
+  underline: {
+    marginTop: 4,
+    height: 2,
+    width: 24,
+    backgroundColor: '#030303',
+    borderRadius: 1,
+  },
+});
 
-export default CustomTabBar
-
+export default CustomTabBar;

@@ -1,18 +1,10 @@
-// components/LoadingScreen.tsx
 import React from 'react';
-import { View, ActivityIndicator, StyleSheet, Text, Image } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Text } from 'react-native';
 
 export function LoadingScreen({ message = 'Loading…' }: { message?: string }) {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/images/signin-img.png')} // Replace with actual image path
-        style={styles.image}
-        resizeMode="contain"
-      />
-
-      <ActivityIndicator size={60} color={'#FF8AAE'}/>
-
+      <ActivityIndicator size={60} color="#123458" />
       <Text style={styles.text}>{message}</Text>
     </View>
   );
@@ -23,18 +15,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFC6D0',
+    backgroundColor: '#F1EFEC',
   },
   text: {
     marginTop: 12,
     fontSize: 16,
-    color: 'white',
+    color: '#030303',
     fontWeight: 'bold',
   },
-  image: {
-    width: 220,
-    height: 220,
-    borderRadius: 20,
-    marginBottom: 20,
-  }
 });
